@@ -34,3 +34,4 @@ class Solution {
         return maxArea;
     }
 }
+The intuition is that for every bar, we want to find the maximum width for which that bar can be the smallest height, because the rectangle area is height × width. We use a monotonic increasing stack that stores the indices of bars in increasing order of height. While traversing the array, if the current height is smaller than the height at the stack top, we pop that index because the popped bar cannot extend further to the right. Its height is h = arr[st.pop()], and its width is calculated using the current index as the right boundary and the new stack top as the left boundary: if the stack is empty, width = i; otherwise, width = i - st.peek() - 1. We then calculate h * width and update maxArea. We add an extra 0 at the end so that all remaining bars are popped and processed. Each index is pushed and popped at most once, so the time complexity is O(n) and the space complexity is O(n).
